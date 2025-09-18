@@ -1,0 +1,3 @@
+module roomAutomata
+
+go 1.24.4
