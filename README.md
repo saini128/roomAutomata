@@ -40,3 +40,9 @@ The mobile app communicates with the Go server via **REST APIs**. The Go server,
 <br>
 
 
+## TODO
+- [] Make Backend in a CRUD format with status and update endpoints. Simulate the room.
+- [] Make the ESP32 code to work with serial for now on and connect AC and Light with Ultrasound sensor.
+- [] Make a route that can tell the ESP32 to turn on/off the light and AC. (Use queue with ESP acknowledgement)
+- [] Implement RabbitMQ to avoid polling system.
+- [] Make a Kotlin app to control the room.
