@@ -4,6 +4,8 @@ use rocket::State;
 
 use crate::data::MyState;
 
+
+// -------------------- API Key Guard --------------------
 // Simple handler for the root path
 #[get("/")]
 pub fn index() -> status::Accepted<Value> {
@@ -13,7 +15,7 @@ pub fn index() -> status::Accepted<Value> {
 // Handler to get the current state
 #[get("/status")]
 pub fn get_data(state: &State<MyState>) -> Result<Value, status::Custom<Value>> {
-    let data = state.data.lock().unwrap();
+    let data = state.room.lock().unwrap();
     Ok(json!({ "message": "Here is the device status", "value": *data }))
 }
 

@@ -9,6 +9,7 @@ mod data;
 mod handlers;
 mod models;
 use data::MyState;
+use dotenvy::dotenv;
 
 // Define a CORS fairing to allow all origins and headers
 pub struct CORS;
@@ -31,7 +32,7 @@ impl Fairing for CORS {
 
 #[launch]
 async fn rocket() -> _ {
-
+    dotenv().ok();
     rocket::build()
         // Attach the CORS fairing to allow all origins and headers
         .attach(CORS)

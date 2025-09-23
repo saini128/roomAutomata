@@ -1,18 +1,40 @@
 
 use rocket::serde::{Deserialize, Serialize};
 
-// The `Room` struct contains a collection of smart devices.
+
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(crate = "rocket::serde")]
 pub struct Room {
     pub id: u32,
     pub devices: Vec<Device>,
 }
+impl Default for Room {
+    fn default() -> Self {
+        Room {
+            id: 1,
+            devices: vec![
+                Device::Ac {
+                    id: 1,
+                    state: AcState{on: false, temperature: 24},
+                },
+                Device::Light {
+                    id: 2,
+                    state: LightState::Off,
+                },
+                Device::Switch {
+                    id: 3,
+                    pin: 5,
+                    state: SwitchState::Off,
+                },
+            ],
+        }
+    }
+}
 
-// The `Device` enum represents the different types of devices in a room.
-// Each variant holds the specific data and state for that device type.
+
+
 #[derive(Debug, Clone, Deserialize, Serialize)]
-#[serde(crate = "rocket::serde", tag = "type", content = "details")]
+#[serde(crate = "rocket::serde", tag = "type")]
 pub enum Device {
     #[serde(rename = "ac")]
     Ac {
@@ -32,7 +54,7 @@ pub enum Device {
     },
 }
 
-// The `AcState` struct holds the state information for an air conditioner.
+
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(crate = "rocket::serde")]
 pub struct AcState {
@@ -40,7 +62,7 @@ pub struct AcState {
     pub temperature: u32,
 }
 
-// The `LightState` enum handles the different modes for a light.
+
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(crate = "rocket::serde")]
 pub enum LightState {
@@ -52,7 +74,7 @@ pub enum LightState {
     Auto,
 }
 
-// The `SwitchState` enum represents the on/off state of a switch.
+
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(crate = "rocket::serde")]
 pub enum SwitchState {
@@ -78,4 +100,10 @@ pub enum Signal {
     AutoLight {
         value: bool,
     },
+}
+
+impl Default for Signal {
+    fn default() -> Self {
+        Signal::Static { pin: 0, value: false }
+    }
 }

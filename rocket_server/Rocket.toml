@@ -1,3 +1,4 @@
 [default]
 address = "127.0.0.1"
 port = 8001
+secret_key = "ZTMycmc0dHJyZXZjMzRjcmVzZHNmZDMyNHJlZ2YjRUQ="
