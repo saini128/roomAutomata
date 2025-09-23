@@ -1,16 +1,14 @@
-use std::sync::Mutex;
+use std::sync::{Arc, Mutex};
 use crate::models::Room;
+
 pub struct MyState {
-    pub data: Mutex<String>,
-    pub room: Mutex<Room>,
+    pub room: Arc<Mutex<Room>>,
 }
 
 impl Default for MyState {
     fn default() -> Self {
         MyState {
-            data: Mutex::new("Initial Value".to_string()),
-            room: Mutex::new(Room::default()),
+            room: Arc::new(Mutex::new(Room::default())),
         }
     }
 }
-

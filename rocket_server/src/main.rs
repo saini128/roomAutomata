@@ -39,5 +39,5 @@ async fn rocket() -> _ {
         // Manage the state for shared data
         .manage(MyState::default())
         // Mount all the handlers from the handlers module
-        .mount("/", routes![handlers::index, handlers::get_data, handlers::update_data])
+        .mount("/", routes![handlers::index, handlers::get_data, handlers::update_data, handlers::stream])
 }
