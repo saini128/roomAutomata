@@ -5,7 +5,6 @@ use rocket::serde::json::{Json, json, Value};
 
 use rocket::State;
 use crate::models::{UpdateRequest, Device, LightState, SwitchState, PartialAcState};
-use crate::middleware::ApiKey;
 use crate::data::MyState;
 
 
@@ -18,7 +17,7 @@ pub fn index() -> status::Accepted<Value> {
 
 // Handler to get the current state
 #[get("/status")]
-pub fn get_data(_key: ApiKey, state: &State<MyState>) -> Result<Value, status::Custom<Value>> {
+pub fn get_data( state: &State<MyState>) -> Result<Value, status::Custom<Value>> {
     let data = state.room.lock().unwrap();
     Ok(json!(*data))
 }

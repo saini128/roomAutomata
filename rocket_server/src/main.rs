@@ -35,10 +35,8 @@ impl Fairing for CORS {
 async fn rocket() -> _ {
     dotenv().ok();
     rocket::build()
-        // Attach the CORS fairing to allow all origins and headers
         .attach(CORS)
-        // Manage the state for shared data
+        .attach(middleware::ApiKeyFairing)
         .manage(MyState::default())
-        // Mount all the handlers from the handlers module
         .mount("/", routes![handlers::index, handlers::get_data, handlers::update_data, handlers::stream])
 }
