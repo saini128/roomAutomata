@@ -8,6 +8,7 @@ use rocket::{Request, Response};
 mod data;
 mod handlers;
 mod models;
+mod middleware;
 use data::MyState;
 use dotenvy::dotenv;
 

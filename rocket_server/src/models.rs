@@ -107,3 +107,17 @@ impl Default for Signal {
         Signal::Static { pin: 0, value: false }
     }
 }
+
+#[derive(Debug, Clone, Deserialize)]
+#[serde(crate = "rocket::serde")]
+pub struct UpdateRequest {
+    pub device_id: u32,
+    pub state: serde_json::Value, // flexible since state differs by device
+}
+// Partial structs for patching
+#[derive(Debug, Clone, Deserialize)]
+#[serde(crate = "rocket::serde")]
+pub struct PartialAcState {
+    pub on: Option<bool>,
+    pub temperature: Option<u32>,
+}
